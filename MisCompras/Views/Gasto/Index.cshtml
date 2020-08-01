@@ -1,0 +1,138 @@
+@model IEnumerable<MisCrompras.Models.Gasto>
+
+@{
+    ViewData["Title"] = "Todos";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Gastos
+                    <small>Listado de gastos registrados en el sistema</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Gastos</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><a asp-action="Create"><i class="fa fa-plus">Nueva</i></a> </h5>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Categoria
+                                    </th>
+                                    <th>
+                                        Monto
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ga in ViewBag.Agrupacion)
+                                {
+                                    <tr>
+                                        <td>
+                                            @ga.Categoria
+                                        </td>
+                                        <td>
+                                            Q @ga.Monto
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        Total de gastos mes actual
+                                    </th>
+                                    <th>
+                                        @ViewBag.TotalGastos
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Categoria)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripción)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Monto)
+                                    </th>
+
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuario)
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripción)
+                                        </td>
+                                        <td>
+                                            Q @Html.DisplayFor(modelItem => item.Monto)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuario.User)
+                                        </td>
+
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

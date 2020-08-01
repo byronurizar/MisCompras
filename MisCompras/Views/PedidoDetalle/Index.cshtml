@@ -1,0 +1,83 @@
+@model IEnumerable<MisCrompras.Models.PedidoDetalle>
+
+@{
+    ViewData["Title"] = "Todos";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Detalle de pedido
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><a href="~/PedidoDetalle/create/@ViewData["PedidoId"]"><i class="fa fa-plus">Agregar producto</i></a> </h5>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+
+                        @*<table id="export-button" class="display">*@
+                        @*<table id="basic-1" class="display">*@
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cliente)
+                                    </th>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cantidad)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Marca)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cliente.Nombre) @Html.DisplayFor(modelItem => item.Cliente.Apellido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cantidad)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="~/Pedido/Index">Regresar</a>
+    </div>
+</div>

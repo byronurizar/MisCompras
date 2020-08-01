@@ -1,0 +1,92 @@
+@model MisCrompras.Models.Marca
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "_LayoutConMenu";
+}
+
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Marca
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Marca </li>
+                    <li class="breadcrumb-item active">Detalle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Detalle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Descripcion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Descripcion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PorcentajeDescuento)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PorcentajeDescuento)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Moneda)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Moneda)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Dividendo)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Dividendo)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaCreacion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Usuario.User)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Estado.Descripcion)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Regresar a listado</a>
+</div>

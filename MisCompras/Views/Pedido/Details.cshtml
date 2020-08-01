@@ -1,0 +1,147 @@
+@model MisCrompras.Models.Pedido
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "_LayoutConMenu";
+}
+
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Detalle de pedido
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Pedido </li>
+                    <li class="breadcrumb-item active">Detalle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    @Html.DisplayFor(model => model.Proveedor.Descripcion)
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Agregar producto</h4>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="ltaCliente">Cliente</label>
+                            <input type="text" class="form-control" id="ltaCliente" placeholder="Cliente" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-8 mb-3">
+                            <label for="txtDescripcion">Descripción de producto</label>
+                            <input type="text" class="form-control" id="txtDescripcion" placeholder="Descripción" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="ltaMarca">Marca</label>
+                            <input type="text" class="form-control" id="ltaMarca" placeholder="Marca" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="txtPagina">Página en catálogo</label>
+                            <input type="text" class="form-control" id="txtPagina" placeholder="Número de página en catálogo" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="txtTalla">Talla</label>
+                            <input type="text" class="form-control" id="txtTalla" placeholder="Talla" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="txtColor">Color</label>
+                            <input type="text" class="form-control" id="txtColor" placeholder="Color" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="txtPrecioCatalogo">Precio en catálogo</label>
+                            <input type="text" class="form-control" id="txtPrecioCatalogo" placeholder="Precio en catálogo" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="txtPrecioCompra">Precio con descuento</label>
+                            <input type="text" class="form-control" id="txtPrecioCompra" placeholder="Precio real de compra" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="txtCantidad">Cantidad</label>
+                            <input type="text" class="form-control" id="txtCantidad" placeholder="Cantidad" required>
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="txtTotal">Total</label>
+                            <input type="text" class="form-control" id="txtTotal" placeholder="Total">
+                            <div class="invalid-feedback">
+                                Campo obligatorio
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Regresar a listado</a>
+</div>

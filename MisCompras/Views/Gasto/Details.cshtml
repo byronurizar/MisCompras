@@ -1,0 +1,86 @@
+@model MisCrompras.Models.Gasto
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "_LayoutConMenu";
+}
+
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Detalle de gasto
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Gasto </li>
+                    <li class="breadcrumb-item active">Detalle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Detalle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Monto)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Monto)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Descripción)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Descripción)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaCreacion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Categoria)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Categoria.Nombre)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Usuario.Password)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Estado.Descripcion)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Regresar a listado</a>
+</div>

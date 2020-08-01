@@ -1,0 +1,120 @@
+@model MisCrompras.Models.PedidoDetalle
+
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "_LayoutConMenu";
+}
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Eliminar Producto
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Detalle de pedido </li>
+                    <li class="breadcrumb-item active">Eliminar Item</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Detalle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Cliente)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Cliente.Nombre) @Html.DisplayFor(model => model.Cliente.Apellido)
+                            </dd>
+                            <dt>
+                                Producto
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Descripcion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Marca)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Marca.Descripcion)
+                            </dd>
+                            <dt>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Talla)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Talla)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Color)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Color)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Pagina)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Pagina)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PrecioCompra)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.PrecioCompra)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Cantidad)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Cantidad)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaCreacion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Usuario.User)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Estado.Descripcion)
+                            </dd>
+
+                        </dl>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Eliminar" class="btn btn-primary" /> |
+                        <a href="~/PedidoDetalle/Index/@Model.PedidoId">Regresar a listado</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    int perfilId = 0;
+    int usuarioId = 0;
+    try
+    {
+        perfilId = Convert.ToInt32(Context.Session.GetString("PerfilId"));
+        usuarioId = Convert.ToInt32(Context.Session.GetString("UsuarioId"));
+
+        if (usuarioId <= 0 || perfilId <= 0)
+        {
+            Context.Response.Redirect("../Usuario/Login");
+        }
+
+    }
+    catch
+    {
+        Context.Response.Redirect("../Usuario/Login");
+    }
+
+}
+@if (perfilId == 1)
+{
+    <li>
+        <div class="sidebar-title">Menu</div>
+
+        <a href="#" class="sidebar-header">
+            <i class="icon-desktop"></i><span>Administración</span>
+            <i class="fa fa-angle-right pull-right"></i>
+        </a>
+
+        <ul class="sidebar-submenu">
+            <li><a asp-area="" asp-controller="Perfil" asp-action="Index"><i class="fa fa-angle-right"></i>Perfiles</a></li>
+            <li><a asp-area="" asp-controller="Marca" asp-action="Index"><i class="fa fa-angle-right"></i>Marca</a></li>
+            <li><a asp-area="" asp-controller="Usuario" asp-action="Index"><i class="fa fa-angle-right"></i>Usuarios</a></li>
+            <li><a asp-area="" asp-controller="Departamento" asp-action="Index"><i class="fa fa-angle-right"></i>Departamentos</a></li>
+            <li><a asp-area="" asp-controller="Municipio" asp-action="Index"><i class="fa fa-angle-right"></i>Municipios</a></li>
+            <li><a asp-area="" asp-controller="EstadoPedido" asp-action="Index"><i class="fa fa-angle-right"></i>Estados de pedido</a></li>
+            <li><a asp-area="" asp-controller="EstadoVenta" asp-action="Index"><i class="fa fa-angle-right"></i>Estados de venta</a></li>
+            <li><a asp-area="" asp-controller="Categoria" asp-action="Index"><i class="fa fa-angle-right"></i>Categoria de Gastos</a></li>
+        </ul>
+
+    </li>
+    <li>
+        <a href="#" class="sidebar-header">
+            <i class="fa fa-home"></i><span>Opciones</span>
+            <i class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="sidebar-submenu">
+            <li><a asp-area="" asp-controller="Cliente" asp-action="Index"><i class="fa fa-angle-right"></i>Clientes</a></li>
+            <li><a asp-area="" asp-controller="Cliente" asp-action="Deudores"><i class="fa fa-angle-right"></i>Deudores</a></li>
+            <li><a asp-area="" asp-controller="Proveedor" asp-action="Index"><i class="fa fa-angle-right"></i>Proveedores</a></li>
+            <li><a asp-area="" asp-controller="Pedido" asp-action="Index"><i class="fa fa-angle-right"></i>Generar Pedido</a></li>
+            <li><a asp-area="" asp-controller="Gasto" asp-action="Index"><i class="fa fa-angle-right"></i>Gastos</a></li>
+        </ul>
+    </li>
+}
+else
+{
+    <div class="sidebar-title">Menu</div>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Cliente" asp-action="Index"><i class="fa fa-angle-right"></i>Clientes</a></li>
+    <li><a asp-area="" asp-controller="Cliente" asp-action="Deudores"><i class="fa fa-angle-right"></i>Deudores</a></li>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Proveedor" asp-action="Index"><i class="fa fa-angle-right"></i>Proveedores</a></li>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Pedido" asp-action="Index"><i class="fa fa-angle-right"></i>Generar Pedido</a></li>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Gasto" asp-action="Index"><i class="fa fa-angle-right"></i>Gastos</a></li>
+}

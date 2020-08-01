@@ -1,0 +1,71 @@
+@model MisCrompras.Models.Categoria
+@{
+    ViewData["Title"] = "Nuevo";
+    Layout = "_LayoutConMenu";
+}
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Registrar Categor&iacute;a de gasto
+                    <small>Completar toda la informaci&oacute;n solicitada por el formulario</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Categor&iacute;a</li>
+                    <li class="breadcrumb-item active">Nueva</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Nuevo</h5>
+                </div>
+                <form asp-action="Create" novalidate>
+                    <div class="card-body">
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Nombre" class="control-label"></label>
+                                    <input asp-for="Nombre" class="form-control" />
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="EstadoId" class="control-label"></label>
+                                    <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <input type="reset" class="btn btn-light" value="Limpiar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Regresar a listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

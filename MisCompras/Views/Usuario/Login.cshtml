@@ -1,0 +1,51 @@
+@model MisCrompras.Models.Usuario
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutSinMenu";
+}
+<div class="auth-bg">
+    <div class="authentication-box">
+        <h4 class="text-center">Ingresar al Sistema</h4>
+        <h6 class="text-center">Por favor ingrese sus credenciales</h6>
+        <div class="card mt-4 p-4 mb-0">
+            <form asp-action="Login" class="theme-form">
+                <div class="form-group">
+                    <label class="col-form-label pt-0">Usuario</label>
+                    <input type="text" asp-for="User" class="form-control" placeholder="Ingrese su nombre de usuario" required>
+                    <span asp-validation-for="User" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Password</label>
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Ingrese su password" required>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                @*<div class="checkbox p-0">
+                    <input id="checkbox1" type="checkbox">
+                    <label for="checkbox1">Recordarme</label>
+                </div>*@
+                <div class="form-group form-row mt-3 mb-0">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    @if (TempData["Codigo"] != null)
+    {
+    <script>
+          @{
+              string tipo = TempData["Codigo"].ToString() == "1" ? "success" : "danger";
+              string mensaje = TempData["mensaje"].ToString();
+          }
+         @Html.Raw("alerta('informaci&oacute;n!','"+mensaje+"','"+tipo+"')");
+    </script>
+    }
+
+}

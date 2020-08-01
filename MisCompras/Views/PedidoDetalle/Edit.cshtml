@@ -1,0 +1,184 @@
+@model MisCrompras.Models.PedidoDetalle
+
+@{
+    ViewData["Title"] = "Actualizar";
+    Layout = "_LayoutConMenu";
+}
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Actualizar Producto
+                    <small>Completar toda la informaci&oacute;n solicitada por el formulario</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Detalle de pedido </li>
+                    <li class="breadcrumb-item active">Actualizar</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Actualizar</h5>
+                </div>
+                <form asp-action="Edit" novalidate>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="ClienteId" class="control-label"></label>
+                                    <select asp-for="ClienteId" class="form-control">
+                                        @foreach (var item in ViewBag.Clientes)
+                                        {
+                                            <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Descripcion" class="control-label"></label>
+                                    <input asp-for="Descripcion" class="form-control" />
+                                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="MarcaId" class="control-label"></label>
+                                    <select asp-for="MarcaId" class="form-control" asp-items="ViewBag.MarcaId"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Pagina" class="control-label"></label>
+                                    <input asp-for="Pagina" class="form-control" />
+                                    <span asp-validation-for="Pagina" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Talla" class="control-label"></label>
+                                    <input asp-for="Talla" class="form-control" />
+                                    <span asp-validation-for="Talla" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Color" class="control-label"></label>
+                                    <input asp-for="Color" class="form-control" />
+                                    <span asp-validation-for="Color" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label class="control-label">Precio en cat&aacute;logo </label>
+                                    <input type="text" placeholder="Precio en cat&aacute;logo" id="txtPrecioEnCatalogo" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="PrecioCompra" class="control-label">Precio de Compra (Q.)</label>
+                                    <input asp-for="PrecioCompra" class="form-control" />
+                                    <span asp-validation-for="PrecioCompra" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="Cantidad" class="control-label"></label>
+                                    <input asp-for="Cantidad" class="form-control" />
+                                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label class="control-label">Total(Q) </label>
+                                    <input type="text" id="txtPrecioEnCatalogo" class="form-control" readonly="readonly" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <input type="reset" class="btn btn-light" value="Limpiar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a href="~/PedidoDetalle/Index/@Model.PedidoId">Regresar a listado</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $("#Cantidad").val(1);
+            $("#Pagina").val(0);
+            $("#Cantidad").change(function () {
+                calcularTotal();
+            });
+
+            $("#MarcaId").change(function () {
+                let precio = $("#txtPrecioEnCatalogo").val();
+                if (precio.length > 0) {
+                    calcularPrecio();
+                    calcularTotal();
+                }
+
+            });
+            $("#txtPrecioEnCatalogo").change(function () {
+                calcularPrecio();
+            });
+        });
+
+        function calcularPrecio() {
+            let moneda = '';
+            let MarcaId = $("#MarcaId").val();
+            let precio = $("#txtPrecioEnCatalogo").val();
+            let dividendo = 0;
+            let porcentajeDescuento = 0;
+
+            var data = { MarcaId };
+            $.get('../InfoMarca', data, function (response) {
+                moneda = response.valor[0].moneda;
+                let total = 0;
+                if (moneda === "P") {
+                    dividendo = response.valor[0].dividendo;
+                    porcentajeDescuento = parseFloat(response.valor[0].porcentajeDescuento) / 100;
+                    total = ((parseFloat(precio) - parseFloat(precio * porcentajeDescuento)) / dividendo)
+                } else {
+                    porcentajeDescuento = parseFloat(response.valor[0].porcentajeDescuento) / 100;
+                    total = ((parseFloat(precio) - parseFloat(precio * porcentajeDescuento)));
+                }
+                let totalTxt = total.toFixed(2);
+                $("#PrecioCompra").val(totalTxt);
+                calcularTotal();
+            });
+        }
+        function calcularTotal() {
+            let precioUnitario = $("#PrecioCompra").val();
+            let cantidad = $("#Cantidad").val();
+            let total = parseFloat(precioUnitario) * parseFloat(cantidad);
+            let totalTxt = total.toFixed(2);
+            $("#txtTotal").val(totalTxt);
+        }
+    </script>
+}

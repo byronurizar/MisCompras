@@ -1,0 +1,102 @@
+@model IEnumerable<MisCrompras.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuario";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Usuario
+                    <small>Listado de usuario registrados en el sistema</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Usuarios</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    
+</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><a asp-action="Create"><i class="fa fa-plus">Nuevo</i></a> </h5>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+
+                        @*<table id="export-button" class="display">*@
+                        <table id="basic-1" class="display">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.User)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Password)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuarios)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Estado)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Perfil)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.User)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Password)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuarios.User)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Perfil.Nombre)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

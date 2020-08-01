@@ -1,0 +1,99 @@
+@model MisCrompras.Models.Cliente
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "_LayoutConMenu";
+}
+
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Cliente
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Cliente </li>
+                    <li class="breadcrumb-item active">Detalle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-builder">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Detalle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Nombre)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Apellido)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Apellido)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Direccion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Direccion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Telefono)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Telefono)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaCreacion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Municipio)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Municipio.Descripcion)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Usuario.User)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Estado.Descripcion)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Regresar a listado</a>
+</div>
+

@@ -1,0 +1,19 @@
+Usar powershell
+dotnet aspnet-codegenerator controller -name ClienteController -m Cliente -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name CreditoAbonoController -m CreditoAbono -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name DepartamentoController -m Departamento -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name GastoPedidoController -m GastoPedido -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name MarcaController -m Marca -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name MunicipioController -m Municipio -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name PedidoDetalleController -m PedidoDetalle -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name PedidoController -m Pedido -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name PerfilController -m Perfil -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name UsuarioController -m Usuario -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name VentaController -m Venta -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name VentaDetalleController -m VentaDetalle -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name EstadoController -m Estado -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name EstadoPedidoController -m EstadoPedido -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name EstadoVentaController -m EstadoVenta -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name CreditoAbonoController -m CreditoAbono -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name CategoriaController -m Categoria -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+dotnet aspnet-codegenerator controller -name GastoController -m Gasto -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f

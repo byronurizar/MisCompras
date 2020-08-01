@@ -1,0 +1,105 @@
+@model IEnumerable<MisCrompras.Models.Marca>
+
+@{
+    ViewData["Title"] = "Todos";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Marcas
+                    <small>Listado de marcas registrados en el sistema</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Marcas</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><a asp-action="Create"><i class="fa fa-plus">Nueva</i></a> </h5>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+
+                        @*<table id="export-button" class="display">*@
+                        <table id="basic-1" class="display">
+
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PorcentajeDescuento)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Moneda)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Dividendo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuario)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Estado)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PorcentajeDescuento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Moneda)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Dividendo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario.User)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

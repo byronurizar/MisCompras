@@ -1,0 +1,105 @@
+@model IEnumerable<MisCrompras.Models.CreditoAbono>
+
+@{
+    ViewData["Title"] = "Todos";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    @ViewBag.nombreCliente
+                    <small>Historial de cr&eacute;ditos y abonos</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><a href="~/CreditoAbono/create/@ViewBag.clienteId"><i class="fa fa-plus">Credito</i></a>|<a href="~/CreditoAbono/Abono/@ViewBag.clienteId"><i class="fa fa-check">Abono</i></a> </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="control-label">Saldo Pendiente</label>
+                                <input class="form-control" type="text" readonly value="Q @ViewBag.saldo" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="dt-ext table-responsive">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tipo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Monto)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuario)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @if (item.Tipo == 1)
+                                        {
+                                            <td>
+                                                Abono
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                Credito
+                                            </td>
+                                        }
+                                        <td>
+                                            Q @Html.DisplayFor(modelItem => item.Monto)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuario.User)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="~/Cliente/Index">Regresar</a>
+    </div>
+</div>

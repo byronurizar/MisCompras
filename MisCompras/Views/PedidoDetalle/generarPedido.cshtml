@@ -1,0 +1,83 @@
+@model IEnumerable<MisCrompras.Models.PedidoDetalle>
+
+@{
+    ViewData["Title"] = "Detalle de Pedido";
+    Layout = "_LayoutSinMenu";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Detalle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+
+                        <table id="export-button" class="display">
+                        @*<table id="basic-1" class="display">*@
+                        @*<table class="table">*@
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Marca)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Pagina)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Talla)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Color)
+                                    </th>
+                                    @*<th>
+                                        @Html.DisplayNameFor(model => model.PrecioCompra)
+                                    </th>*@
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cantidad)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Pagina)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Talla)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Color)
+                                    </td>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.PrecioCompra)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cantidad)
+                                    </td>
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="~/Pedido/Index">Regresar</a>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+@model IEnumerable<MisCrompras.Models.Pedido>
+
+@{
+    ViewData["Title"] = "Todos";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Pedidos
+                    <small>Listado de pedidos que no han sido completados</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Pedidos</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><a asp-action="Create"><i class="fa fa-plus">Nuevo</i></a> </h5>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+
+                        @*<table id="export-button" class="display">*@
+                        @*<table id="basic-1" class="display">*@
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Proveedor)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuario)
+                                    </th>
+                                    <th>
+                                        Estado de pedido
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Proveedor.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario.User)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EstadoPedido.Descripcion)
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a href="~/PedidoDetalle/Index/@item.Id">Detalle</a> |
+                                        <a href="~/PedidoDetalle/generarPedido/@item.Id">Exportar</a>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
