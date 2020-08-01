@@ -1,3 +1,4 @@
+se debe de utilizar net core 3.1
 Usar powershell
 dotnet aspnet-codegenerator controller -name ClienteController -m Cliente -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
 dotnet aspnet-codegenerator controller -name CreditoAbonoController -m CreditoAbono -dc MisComprasContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
