@@ -41,12 +41,25 @@ namespace MisCrompras.Controllers
             {
                 int UsuarioId = infoUsuario.Id;
                 int PerfilId = infoUsuario.PerfilId;
+                CookieOptions option = new CookieOptions();
+                option.Expires = DateTime.Now.AddMonths(3);
+                option.HttpOnly = true;
+                option.IsEssential = true;
+                
+                Response.Cookies.Append("UsuarioId",UsuarioId.ToString(),option);
+                Response.Cookies.Append("PerfilId", PerfilId.ToString(), option);
                 HttpContext.Session.SetString("UsuarioId", UsuarioId.ToString());
                 HttpContext.Session.SetString("PerfilId", PerfilId.ToString());
                 return Redirect("~/Cliente/Index");
             }
 
             return View(usuario);
+        }
+        public IActionResult Salir()
+        {
+            Response.Cookies.Delete("PerfilId");
+            Response.Cookies.Delete("UsuarioId");
+            return View("../Usuario/Login");
         }
 
         // GET: Usuario

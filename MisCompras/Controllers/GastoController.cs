@@ -24,19 +24,20 @@ namespace MisCrompras.Controllers
         public async Task<IActionResult> Index()
         {
             DateTime fechaIncial = new DateTime(DateTime.Now.Year,DateTime.Now.Month,1);
-            DateTime fechaFinal = fechaIncial.AddMonths(1).AddDays(-1);
+            DateTime fechaFinal = fechaIncial.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59);
             decimal totalGastos = 0;
             List<Gasto> listaGastos = new List<Gasto>();
             List<Categoria> listaCategoria = new List<Categoria>();
             List<GastosPorCategoria> listaGastosPorCategoria = new List<GastosPorCategoria>();
 
-            var categorias = _context.Categorias.Where(c => c.EstadoId == 1);
+            var categorias = _context.Categorias.Where(c => c.EstadoId !=3);
             listaCategoria = categorias.ToList();
             var misComprasContext = _context.Gastos.Include(g => g.Categoria).Include(g => g.Estado).Include(g => g.Usuario)
                 .Where(g=>g.EstadoId!=3 && (g.FechaCreacion>=fechaIncial && g.FechaCreacion<=fechaFinal));
 
             listaGastos = misComprasContext.ToList();
 
+            decimal totalGastosVentas = listaGastos.Where(g => g.CategoriaId == 28).Sum(s => s.Monto);
             foreach (Categoria categoria in listaCategoria)
             {
                 int codigoCategoria = categoria.Id;
@@ -54,7 +55,10 @@ namespace MisCrompras.Controllers
             List<GastosPorCategoria> listaOrdenada = new List<GastosPorCategoria>();
             listaOrdenada = listaGastosPorCategoria.OrderByDescending(o => o.Monto).ToList();
             ViewBag.Agrupacion = listaOrdenada;
-            ViewBag.TotalGastos = totalGastos;
+            ViewBag.Total = totalGastos;
+            ViewBag.TotalGastos = totalGastos- totalGastosVentas;
+            ViewBag.totalGastosVentas = totalGastosVentas;
+            listaGastos = listaGastos.OrderBy(item => item.Id).ToList();
             return View(listaGastos);
         }
 
@@ -82,7 +86,7 @@ namespace MisCrompras.Controllers
         // GET: Gasto/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre");
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias.Where(item=>item.EstadoId==1), "Id", "Nombre");
             return View();
         }
 

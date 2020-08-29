@@ -4,8 +4,16 @@
     int usuarioId = 0;
     try
     {
-        perfilId = Convert.ToInt32(Context.Session.GetString("PerfilId"));
-        usuarioId = Convert.ToInt32(Context.Session.GetString("UsuarioId"));
+        string PerfilIdCookie = Context.Request.Cookies["PerfilId"];
+        string UsuarioIdCookie = Context.Request.Cookies["UsuarioId"];
+
+        //perfilId = Convert.ToInt32(Context.Session.GetString("PerfilId"));
+        //usuarioId = Convert.ToInt32(Context.Session.GetString("UsuarioId"));
+        perfilId = Convert.ToInt32(PerfilIdCookie);
+        usuarioId = Convert.ToInt32(UsuarioIdCookie);
+
+        Context.Session.SetString("UsuarioId", usuarioId.ToString());
+        Context.Session.SetString("PerfilId", perfilId.ToString());
 
         if (usuarioId <= 0 || perfilId <= 0)
         {
@@ -54,13 +62,15 @@
             <li><a asp-area="" asp-controller="Gasto" asp-action="Index"><i class="fa fa-angle-right"></i>Gastos</a></li>
         </ul>
     </li>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Usuario" asp-action="Salir"><i class="fa fa-angle-right"></i>Salir</a></li>
 }
 else
 {
     <div class="sidebar-title">Menu</div>
     <li><a class="sidebar-header" asp-area="" asp-controller="Cliente" asp-action="Index"><i class="fa fa-angle-right"></i>Clientes</a></li>
-    <li><a asp-area="" asp-controller="Cliente" asp-action="Deudores"><i class="fa fa-angle-right"></i>Deudores</a></li>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Cliente" asp-action="Deudores"><i class="fa fa-angle-right"></i>Deudores</a></li>
     <li><a class="sidebar-header" asp-area="" asp-controller="Proveedor" asp-action="Index"><i class="fa fa-angle-right"></i>Proveedores</a></li>
     <li><a class="sidebar-header" asp-area="" asp-controller="Pedido" asp-action="Index"><i class="fa fa-angle-right"></i>Generar Pedido</a></li>
     <li><a class="sidebar-header" asp-area="" asp-controller="Gasto" asp-action="Index"><i class="fa fa-angle-right"></i>Gastos</a></li>
+    <li><a class="sidebar-header" asp-area="" asp-controller="Usuario" asp-action="Salir"><i class="fa fa-angle-right"></i>Salir</a></li>
 }
