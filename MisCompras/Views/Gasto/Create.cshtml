@@ -40,7 +40,13 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label asp-for="CategoriaId" class="control-label"></label>
-                                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId" onchange="getSubCategoria()"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="SubCategoriaId" class="control-label"></label>
+                                    <select asp-for="SubCategoriaId" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -52,9 +58,9 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label asp-for="Descripción" class="control-label"></label>
-                                    <input asp-for="Descripción" class="form-control" />
-                                    <span asp-validation-for="Descripción" class="text-danger"></span>
+                                    <label asp-for="Descripcion" class="control-label"></label>
+                                    <input asp-for="Descripcion" class="form-control" />
+                                    <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -76,4 +82,34 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(document).ready(function () {
+            getSubCategoria();
+        });
+        const getSubCategoria = () => {
+            let idCategoria = $("#CategoriaId").val();
+            let subCategoria = document.getElementById("SubCategoriaId");
+            $("#SubCategoriaId").empty();
+            fetch(`/Gasto/ListSubCategoria?idCategoria=${idCategoria}`)
+                .then(rsp => rsp.json())
+                .then(data => {
+                    let existe = false;
+                    for (let subCate of data) {
+                        let item = document.createElement("option");
+                        item.textContent = subCate.nombre;
+                        item.value = subCate.id;
+                        subCategoria.appendChild(item);
+                        existe = true;
+                    }
+                    if (!existe) {
+                        let item = document.createElement("option");
+                        item.textContent = "No Aplica";
+                        item.value = 0;
+                        subCategoria.appendChild(item);
+                    }
+                }
+                )
+        }
+    </script>
 }

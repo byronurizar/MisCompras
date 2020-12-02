@@ -13,7 +13,7 @@ namespace MisCrompras.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Display(Prompt = "Nombre de categoria", Name = "Marca")]
+        [Display(Prompt = "Nombre de sub categoria", Name = "Sub Categoría")]
         [Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
 

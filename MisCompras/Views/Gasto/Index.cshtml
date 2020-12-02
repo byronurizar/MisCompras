@@ -96,7 +96,10 @@
                                         @Html.DisplayNameFor(model => model.Categoria)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Descripción)
+                                        @Html.DisplayNameFor(model => model.SubCategoria)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Monto)
@@ -121,8 +124,21 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Categoria.Nombre)
                                         </td>
+                                        @{
+                                            if (item.SubCategoria == null)
+                                            {
+                                                <td>N/A</td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SubCategoria.Nombre)
+                                                </td>
+                                            }
+                                        }
+
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Descripción)
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
                                         </td>
                                         <td>
                                             Q @Html.DisplayFor(modelItem => item.Monto)
@@ -152,3 +168,13 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        let mensaje = '@TempData["mensaje"]';
+        if (mensaje) {
+        alerta('informaci&oacute;n!', mensaje, 'danger');
+        }
+    });
+    </script>
+}

@@ -1,4 +1,4 @@
-@model MisCrompras.Models.Gasto
+@model MisCrompras.Models.SubCategoria
 
 @{
     ViewData["Title"] = "Actualizar";
@@ -12,14 +12,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Actualizar Gasto
+                    Actualizar Sub Categoría
                     <small>Completar toda la informaci&oacute;n solicitada por el formulario</small>
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Gasto </li>
+                    <li class="breadcrumb-item">Sub Categoría </li>
                     <li class="breadcrumb-item active">Actualizar</li>
                 </ol>
             </div>
@@ -44,28 +44,15 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label asp-for="CategoriaId" class="control-label"></label>
-                                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId" onchange="getSubCategoria()"></select>
+                                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
                                     <span asp-validation-for="CategoriaId" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label asp-for="SubCategoriaId" class="control-label"></label>
-                                    <select asp-for="SubCategoriaId" class="form-control"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label asp-for="Monto" class="control-label"></label>
-                                    <input asp-for="Monto" class="form-control" />
-                                    <span asp-validation-for="Monto" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label asp-for="Descripcion" class="control-label"></label>
-                                    <input asp-for="Descripcion" class="form-control" />
-                                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                                    <label asp-for="Nombre" class="control-label"></label>
+                                    <input asp-for="Nombre" class="form-control" />
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -95,44 +82,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script>
-
-        $(document).ready(function () {
-            getSubCategoria();
-        });
-
-        
-        const getSubCategoria = () => {
-            let idCategoria = $("#CategoriaId").val();
-            let subCategoria = document.getElementById("SubCategoriaId");
-            $("#SubCategoriaId").empty();
-            fetch(`/Gasto/ListSubCategoria?idCategoria=${idCategoria}`)
-                .then(rsp => rsp.json())
-                .then(data => {
-                    let existe = false;
-                    for (let subCate of data) {
-                        let item = document.createElement("option");
-                        item.textContent = subCate.nombre;
-                        item.value = subCate.id;
-                        subCategoria.appendChild(item);
-                        existe = true;
-                    }
-                    if (!existe) {
-                        let item = document.createElement("option");
-                        item.textContent = "No Aplica";
-                        item.value = 0;
-                        subCategoria.appendChild(item);
-                    }
-                    if (existe) {
-                        SelectSubCategoria();
-                    }
-                }
-                )
-        }
-
-        const SelectSubCategoria = () => {
-            let id = '@TempData["Prueba"]';
-            $("#SubCategoriaId").val(id);
-        }
-</script>
 }

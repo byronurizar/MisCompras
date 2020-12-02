@@ -1,29 +1,30 @@
-@model MisCrompras.Models.Gasto
+@model MisCrompras.Models.SubCategoria
 
 @{
-    ViewData["Title"] = "Eliminar";
+    ViewData["Title"] = "Detalles";
     Layout = "_LayoutConMenu";
 }
 
+
+<!-- Container-fluid starts -->
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Eliminar gasto
+                    Detalle de Sub Categor&iacute;a
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Gasto </li>
-                    <li class="breadcrumb-item active">Eliminar</li>
+                    <li class="breadcrumb-item">Sub Categor&iacute;a </li>
+                    <li class="breadcrumb-item active">Detalle</li>
                 </ol>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="form-builder">
     <div class="row">
@@ -36,22 +37,10 @@
                     <div class="row">
                         <dl class="dl-horizontal">
                             <dt>
-                                @Html.DisplayNameFor(model => model.Monto)
+                                @Html.DisplayNameFor(model => model.Nombre)
                             </dt>
                             <dd>
-                                @Html.DisplayFor(model => model.Monto)
-                            </dd>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Descripcion)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Descripcion)
-                            </dd>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.FechaCreacion)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.FechaCreacion)
+                                @Html.DisplayFor(model => model.Nombre)
                             </dd>
                             <dt>
                                 @Html.DisplayNameFor(model => model.Categoria)
@@ -59,24 +48,12 @@
                             <dd>
                                 @Html.DisplayFor(model => model.Categoria.Nombre)
                             </dd>
-                            @{
-                                if (Model.SubCategoria == null)
-                                {
-                                    <dt>SubCategoria</dt>
-                                    <dt>N/A</dt>
-                                }
-                                else
-                                {
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.SubCategoria)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.SubCategoria.Nombre)
-                                    </dd>
-                                }
-                            }
-
-
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaCreacion)
+                            </dd>
                             <dt>
                                 @Html.DisplayNameFor(model => model.Usuario)
                             </dt>
@@ -90,18 +67,14 @@
                                 @Html.DisplayFor(model => model.Estado.Descripcion)
                             </dd>
                         </dl>
-
                     </div>
-
-                </div>
-                <div class="card-footer">
-                    <form asp-action="Delete">
-                        <input type="hidden" asp-for="Id" />
-                        <input type="submit" value="Eliminar" class="btn btn-primary" /> |
-                        <a asp-action="Index" class="btn btn-link">Regresar a listado</a>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Regresar a listado</a>
 </div>

@@ -1,4 +1,4 @@
-@model IEnumerable<MisCrompras.Models.Categoria>
+@model IEnumerable<MisCrompras.Models.Presupuesto>
 
 @{
     ViewData["Title"] = "Todos";
@@ -10,14 +10,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Categorias de gasto
-                    <small>Listado de categorias registrados en el sistema</small>
+                    Presupuesto
+                    <small>Listado</small>
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Categorias</li>
+                    <li class="breadcrumb-item">Presupuesto</li>
                 </ol>
             </div>
         </div>
@@ -29,18 +29,22 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5><a asp-action="Create"><i class="fa fa-plus">Nueva</i></a> </h5>
+                    <h5><a asp-action="Create"><i class="fa fa-plus">Nuevo</i></a> </h5>
                 </div>
                 <div class="card-body">
                     <div class="dt-ext table-responsive">
 
-                        @*<table id="export-button" class="display">*@
-                        <table id="basic-1" class="display">
-
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        Año
+                                    </th>
+                                    <th>
+                                        Mes
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -49,11 +53,9 @@
                                         @Html.DisplayNameFor(model => model.Usuario)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Estado)
+                                        Estado de pedido
                                     </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Incluir)
-                                    </th>
+
                                     <th></th>
                                 </tr>
                             </thead>
@@ -65,6 +67,12 @@
                                         @Html.DisplayFor(modelItem => item.Nombre)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Anio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mes)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.FechaCreacion)
                                     </td>
                                     <td>
@@ -73,13 +81,10 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Estado.Descripcion)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Incluir)
-                                    </td>
+
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                        <a href="~/PresupuestoDetalle/Index/@item.Id">Detalle</a> |
                                     </td>
                                 </tr>
                                 }

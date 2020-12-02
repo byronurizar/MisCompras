@@ -1,26 +1,22 @@
-@model MisCrompras.Models.Categoria
-
+@model MisCrompras.Models.Presupuesto
 @{
-    ViewData["Title"] = "Actualizar";
+    ViewData["Title"] = "Nuevo";
     Layout = "_LayoutConMenu";
 }
-
-
-<!-- Container-fluid starts -->
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Actualizar Categoria
+                    Nuevo Presupuesto
                     <small>Completar toda la informaci&oacute;n solicitada por el formulario</small>
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Categoria </li>
-                    <li class="breadcrumb-item active">Actualizar</li>
+                    <li class="breadcrumb-item">Presupuesto </li>
+                    <li class="breadcrumb-item active">Nuevo</li>
                 </ol>
             </div>
         </div>
@@ -32,13 +28,12 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h5>Actualizar</h5>
+                    <h5>Nuevo</h5>
                 </div>
-                <form asp-action="Edit" novalidate>
+                <form asp-action="Create" novalidate>
                     <div class="card-body">
                         <div class="row">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="Id" />
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
@@ -47,23 +42,23 @@
                                     <span asp-validation-for="Nombre" class="text-danger"></span>
                                 </div>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label asp-for="Incluir" class="control-label"></label>
-                                    <select asp-for="Incluir" class="form-control" asp-items="ViewBag.Incluir"></select>
+                                    <label asp-for="Anio" class="control-label"></label>
+                                    <select asp-for="Anio" class="form-control" asp-items="ViewBag.AnioId"></select>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label asp-for="EstadoId" class="control-label"></label>
-                                    <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId"></select>
-                                    <span asp-validation-for="EstadoId" class="text-danger"></span>
+                                    <label asp-for="Mes" class="control-label"></label>
+                                    <select asp-for="Mes" class="form-control" asp-items="ViewBag.MesId"></select>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                         <input type="reset" class="btn btn-light" value="Limpiar">
                     </div>
                 </form>
@@ -71,6 +66,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 <div>

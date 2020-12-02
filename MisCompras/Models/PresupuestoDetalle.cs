@@ -7,26 +7,24 @@ using System.Threading.Tasks;
 
 namespace MisCrompras.Models
 {
-    public class Gasto
+    public class PresupuestoDetalle
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Display(Name = "Presupuesto")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public int PresupuestoId { get; set; }
+
         [Display(Prompt = "Seleccione una categoria", Name = "Categoría")]
         [Required(ErrorMessage = "Campo obligatorio")]
         public int CategoriaId { get; set; }
 
-        [Display(Name = "Sub Categoría")]
-        public int? SubCategoriaId { get; set; }
 
-
-        [Display(Prompt = "Monto de gasto", Name = "Monto")]
+        [Display(Prompt = "Monto de presupuesto mensual", Name = "Monto")]
         [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Monto { get; set; }
-
-        [Display(Prompt = "Monto descripción", Name = "Descripción")]
-        public string Descripcion { get; set; }
 
         [Display(Name = "Estado")]
         [Required(ErrorMessage = "Campo obligatorio")]
@@ -40,9 +38,9 @@ namespace MisCrompras.Models
         [Required(ErrorMessage = "Campo obligatorio")]
         public int UsuarioId { get; set; }
 
-        public Categoria Categoria { get; set; }
-        public SubCategoria SubCategoria { get; set; }
         public Usuario Usuario { get; set; }
         public Estado Estado { get; set; }
+        public Presupuesto Presupuesto { get; set; }
+        public Categoria Categoria { get; set; }
     }
 }

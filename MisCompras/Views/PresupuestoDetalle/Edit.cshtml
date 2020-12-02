@@ -1,10 +1,9 @@
-@model MisCrompras.Models.Categoria
+@model MisCrompras.Models.PresupuestoDetalle
 
 @{
     ViewData["Title"] = "Actualizar";
     Layout = "_LayoutConMenu";
 }
-
 
 <!-- Container-fluid starts -->
 <div class="container-fluid">
@@ -12,14 +11,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Actualizar Categoria
+                    Actualizar Detalle Presupuesto
                     <small>Completar toda la informaci&oacute;n solicitada por el formulario</small>
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Categoria </li>
+                    <li class="breadcrumb-item">Detalle de presupuesto </li>
                     <li class="breadcrumb-item active">Actualizar</li>
                 </ol>
             </div>
@@ -38,19 +37,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="Id" />
-
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label asp-for="Nombre" class="control-label"></label>
-                                    <input asp-for="Nombre" class="form-control" />
-                                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                                    <label asp-for="CategoriaId" class="control-label"></label>
+                                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label asp-for="Incluir" class="control-label"></label>
-                                    <select asp-for="Incluir" class="form-control" asp-items="ViewBag.Incluir"></select>
+                                    <label asp-for="Monto" class="control-label">Monto</label>
+                                    <input asp-for="Monto" class="form-control" />
+                                    <span asp-validation-for="Monto" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -74,9 +71,9 @@
 
 
 <div>
-    <a asp-action="Index">Regresar a listado</a>
+    <a href="~/PresupuestoDetalle/Index/@Model.PresupuestoId">Regresar a listado</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
 }

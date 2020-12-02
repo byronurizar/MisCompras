@@ -1,4 +1,4 @@
-@model IEnumerable<MisCrompras.Models.Categoria>
+@model IEnumerable<MisCrompras.Models.PresupuestoDetalle>
 
 @{
     ViewData["Title"] = "Todos";
@@ -10,15 +10,8 @@
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Categorias de gasto
-                    <small>Listado de categorias registrados en el sistema</small>
+                    Detalle de Presupuesto
                 </h3>
-            </div>
-            <div class="col-lg-6">
-                <ol class="breadcrumb pull-right">
-                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Categorias</li>
-                </ol>
             </div>
         </div>
     </div>
@@ -29,30 +22,30 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5><a asp-action="Create"><i class="fa fa-plus">Nueva</i></a> </h5>
+                    <h5><a href="~/PresupuestoDetalle/create/@ViewData["PresupuestoId"]"><i class="fa fa-plus">Agregar</i></a> </h5>
                 </div>
                 <div class="card-body">
                     <div class="dt-ext table-responsive">
 
                         @*<table id="export-button" class="display">*@
-                        <table id="basic-1" class="display">
-
+                        @*<table id="basic-1" class="display">*@
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Nombre)
+                                        @Html.DisplayNameFor(model => model.Categoria)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.FechaCreacion)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Usuario)
+                                        @Html.DisplayNameFor(model => model.Monto)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Estado)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Incluir)
+                                        @Html.DisplayNameFor(model => model.Usuario)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaCreacion)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -62,19 +55,19 @@
                                 {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                        @Html.DisplayFor(modelItem => item.Categoria.Nombre)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.FechaCreacion)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Usuario.User)
+                                        @Html.DisplayFor(modelItem => item.Monto)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Estado.Descripcion)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Incluir)
+                                        @Html.DisplayFor(modelItem => item.Usuario.User)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaCreacion)
                                     </td>
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
@@ -89,5 +82,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <a href="~/Presupuesto/Index">Regresar</a>
     </div>
 </div>

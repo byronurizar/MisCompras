@@ -25,7 +25,10 @@ namespace MisCrompras.Models
         public DbSet<PedidoDetalle> PedidoDetalles { get; set; }
         public DbSet<EstadoVenta> EstadoVentas { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<SubCategoria> SubCategoria { get; set; }
         public DbSet<Gasto> Gastos { get; set; }
+        public DbSet<Presupuesto> Presupuesto { get; set; }
+        public DbSet<PresupuestoDetalle> PresupuestoDetalle { get; set; }
         //public DbSet<VentaDetalle> VentaDetalles { get; set; }
         //public DbSet<GastoPedido> GastoPedidos { get; set; }
         public MisComprasContext(DbContextOptions<MisComprasContext> options) : base(options)

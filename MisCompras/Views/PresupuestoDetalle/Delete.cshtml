@@ -1,29 +1,27 @@
-@model MisCrompras.Models.Gasto
+@model MisCrompras.Models.PresupuestoDetalle
 
 @{
     ViewData["Title"] = "Eliminar";
     Layout = "_LayoutConMenu";
 }
-
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Eliminar gasto
+                    Eliminar Detalle de Presupuesto
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Gasto </li>
-                    <li class="breadcrumb-item active">Eliminar</li>
+                    <li class="breadcrumb-item">Detalle de Presupuesto </li>
+                    <li class="breadcrumb-item active">Eliminar Item</li>
                 </ol>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="form-builder">
     <div class="row">
@@ -36,16 +34,23 @@
                     <div class="row">
                         <dl class="dl-horizontal">
                             <dt>
+                                @Html.DisplayNameFor(model => model.Presupuesto)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Presupuesto.Nombre)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Categoria.Nombre)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Categoria)
+                            </dd>
+                            <dt>
                                 @Html.DisplayNameFor(model => model.Monto)
                             </dt>
                             <dd>
                                 @Html.DisplayFor(model => model.Monto)
-                            </dd>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Descripcion)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Descripcion)
                             </dd>
                             <dt>
                                 @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -53,30 +58,6 @@
                             <dd>
                                 @Html.DisplayFor(model => model.FechaCreacion)
                             </dd>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Categoria)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Categoria.Nombre)
-                            </dd>
-                            @{
-                                if (Model.SubCategoria == null)
-                                {
-                                    <dt>SubCategoria</dt>
-                                    <dt>N/A</dt>
-                                }
-                                else
-                                {
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.SubCategoria)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.SubCategoria.Nombre)
-                                    </dd>
-                                }
-                            }
-
-
                             <dt>
                                 @Html.DisplayNameFor(model => model.Usuario)
                             </dt>
@@ -89,8 +70,8 @@
                             <dd>
                                 @Html.DisplayFor(model => model.Estado.Descripcion)
                             </dd>
-                        </dl>
 
+                        </dl>
                     </div>
 
                 </div>
@@ -98,7 +79,7 @@
                     <form asp-action="Delete">
                         <input type="hidden" asp-for="Id" />
                         <input type="submit" value="Eliminar" class="btn btn-primary" /> |
-                        <a asp-action="Index" class="btn btn-link">Regresar a listado</a>
+                        <a href="~/PresupuestoDetalle/Index/@Model.PresupuestoId">Regresar a listado</a>
                     </form>
                 </div>
             </div>

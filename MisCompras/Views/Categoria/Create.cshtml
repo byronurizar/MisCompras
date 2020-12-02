@@ -45,6 +45,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
+                                    <label asp-for="Incluir" class="control-label"></label>
+                                    <select asp-for="Incluir" class="form-control" asp-items="ViewBag.Incluir"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
                                     <label asp-for="EstadoId" class="control-label"></label>
                                     <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.EstadoId"></select>
                                 </div>

@@ -1,4 +1,4 @@
-@model IEnumerable<MisCrompras.Models.Categoria>
+@model IEnumerable<MisCrompras.Models.SubCategoria>
 
 @{
     ViewData["Title"] = "Todos";
@@ -10,14 +10,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <h3>
-                    Categorias de gasto
-                    <small>Listado de categorias registrados en el sistema</small>
+                    Sub Categorias
+                    <small>Listado de Sub Categorias registradas en el sistema</small>
                 </h3>
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item">Categorias</li>
+                    <li class="breadcrumb-item">Sub Categorias</li>
                 </ol>
             </div>
         </div>
@@ -33,14 +33,14 @@
                 </div>
                 <div class="card-body">
                     <div class="dt-ext table-responsive">
-
-                        @*<table id="export-button" class="display">*@
-                        <table id="basic-1" class="display">
-
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Categoria)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -48,12 +48,7 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Usuario)
                                     </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Estado)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Incluir)
-                                    </th>
+
                                     <th></th>
                                 </tr>
                             </thead>
@@ -65,17 +60,16 @@
                                         @Html.DisplayFor(modelItem => item.Nombre)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.FechaCreacion)
                                     </td>
+
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Usuario.User)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estado.Descripcion)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Incluir)
-                                    </td>
+
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                                         <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
@@ -87,6 +81,7 @@
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

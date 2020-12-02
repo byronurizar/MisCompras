@@ -29,6 +29,10 @@ namespace MisCrompras.Models
         [Required(ErrorMessage = "Campo obligatorio")]
         public int UsuarioId { get; set; }
 
+        [Display(Prompt = "Incluir en Gastos Familiares", Name = "Incluir")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public int Incluir { get; set; }
+
         public Usuario Usuario { get; set; }
         public Estado Estado { get; set; }
     }

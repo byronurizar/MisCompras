@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MisCompras.Models;
 using MisCrompras.Models;
 
 namespace MisCrompras.Controllers
@@ -51,6 +52,16 @@ namespace MisCrompras.Controllers
         {
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion");
             ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Password");
+            List<AuxListBox> listIncluir = new List<AuxListBox>();
+            AuxListBox itemIncluir = new AuxListBox();
+            itemIncluir.id = 1;
+            itemIncluir.descripcion = "Si";
+            listIncluir.Add(itemIncluir);
+            itemIncluir = new AuxListBox();
+            itemIncluir.id = 0;
+            itemIncluir.descripcion = "No";
+            listIncluir.Add(itemIncluir);
+            ViewData["Incluir"] = new SelectList(listIncluir, "id", "descripcion");
             return View();
         }
 
@@ -59,7 +70,7 @@ namespace MisCrompras.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,EstadoId,FechaCreacion,UsuarioId")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,EstadoId,FechaCreacion,UsuarioId,Incluir")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
@@ -71,6 +82,16 @@ namespace MisCrompras.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", categoria.EstadoId);
+            List<AuxListBox> listIncluir = new List<AuxListBox>();
+            AuxListBox itemIncluir = new AuxListBox();
+            itemIncluir.id = 1;
+            itemIncluir.descripcion = "Si";
+            listIncluir.Add(itemIncluir);
+            itemIncluir = new AuxListBox();
+            itemIncluir.id = 0;
+            itemIncluir.descripcion = "No";
+            listIncluir.Add(itemIncluir);
+            ViewData["Incluir"] = new SelectList(listIncluir, "id", "descripcion");
             return View(categoria);
         }
 
@@ -88,6 +109,16 @@ namespace MisCrompras.Controllers
                 return NotFound();
             }
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", categoria.EstadoId);
+            List<AuxListBox> listIncluir = new List<AuxListBox>();
+            AuxListBox itemIncluir = new AuxListBox();
+            itemIncluir.id = 1;
+            itemIncluir.descripcion = "Si";
+            listIncluir.Add(itemIncluir);
+            itemIncluir = new AuxListBox();
+            itemIncluir.id = 0;
+            itemIncluir.descripcion = "No";
+            listIncluir.Add(itemIncluir);
+            ViewData["Incluir"] = new SelectList(listIncluir, "id", "descripcion");
             return View(categoria);
         }
 
@@ -96,7 +127,7 @@ namespace MisCrompras.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,EstadoId,FechaCreacion,UsuarioId")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,EstadoId,FechaCreacion,UsuarioId,Incluir")] Categoria categoria)
         {
             if (id != categoria.Id)
             {
@@ -110,6 +141,7 @@ namespace MisCrompras.Controllers
                     var Infocategoria = await _context.Categorias.FindAsync(id);
                     Infocategoria.Nombre = categoria.Nombre.Trim().ToUpper();
                     Infocategoria.EstadoId = categoria.EstadoId;
+                    Infocategoria.Incluir = categoria.Incluir;
                     _context.Update(Infocategoria);
                     await _context.SaveChangesAsync();
                 }
@@ -127,6 +159,16 @@ namespace MisCrompras.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EstadoId"] = new SelectList(_context.Estados, "Id", "Descripcion", categoria.EstadoId);
+            List<AuxListBox> listIncluir = new List<AuxListBox>();
+            AuxListBox itemIncluir = new AuxListBox();
+            itemIncluir.id = 1;
+            itemIncluir.descripcion = "Si";
+            listIncluir.Add(itemIncluir);
+            itemIncluir = new AuxListBox();
+            itemIncluir.id = 0;
+            itemIncluir.descripcion = "No";
+            listIncluir.Add(itemIncluir);
+            ViewData["Incluir"] = new SelectList(listIncluir, "id", "descripcion");
             return View(categoria);
         }
 
