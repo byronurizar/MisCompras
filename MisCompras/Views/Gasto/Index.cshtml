@@ -90,9 +90,58 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>GASTO POR CATEGORIA</h5>
+                    <div class="col">
+                        <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
+                            <div class="radio radio-primary">
+                                <input type="radio" name="tipoGrafica" id="radioinline1" value="barra" checked>
+                                <label for="radioinline1" class="mb-0">Gr&aacute;fica de barras</label>
+                            </div>
+                            <div class="radio radio-primary">
+                                <input type="radio" name="tipoGrafica" id="radioinline2" value="pastel">
+                                <label for="radioinline2" class="mb-0">Gr&aacute;fica de pastel</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="col">
+                        <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
+                            <div class="radio radio-primary">
+                                <input type="radio" name="radioIncluir" id="include10" value="-1" checked>
+                                <label for="include10" class="mb-0">Todos los gastos</label>
+                            </div>
+                            <div class="radio radio-primary">
+                                <input type="radio" name="radioIncluir" id="include1" value="1">
+                                <label for="include1" class="mb-0">Solo Gastos Familiares</label>
+                            </div>
+                            <div class="radio radio-primary">
+                                <input type="radio" name="radioIncluir" id="include0" value="0">
+                                <label for="include0" class="mb-0">Gastos no familiares</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body chart-block">
+                    <div class="flot-chart-container" id="divGraficaBarra">
+                        <div id="bar-line-chart-morris" class="flot-chart-placeholder"></div>
+                    </div>
+                    <div class="flot-chart-container" id="divGraficaPastel" style="display:none">
+                        <div id="donut-color-chart-morris" class="flot-chart-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
 @section Scripts {
     <script>
+        let dataCategorias = [];
         const getGastos = async (url) => {
             const response = await fetch(url);
             const result = await response.json();
@@ -102,6 +151,22 @@
             } else {
                 alerta('Error', mensaje, 'danger');
             }
+        }
+        const habilitarGrafica = () => {
+            let tipo = $('input:radio[name=tipoGrafica]:checked').val();
+            if (tipo === "pastel") {
+                document.getElementById("divGraficaPastel").style.display = "block";
+                document.getElementById("divGraficaBarra").style.display = "none";
+                graficaPastel(getDataFiltrar());
+            } else {
+                document.getElementById("divGraficaBarra").style.display = "block";
+                document.getElementById("divGraficaPastel").style.display = "none";
+                graficaBarra(getDataFiltrar());
+            }
+        }
+        const getDataFiltrar = () => {
+            let incluir = $('input:radio[name=radioIncluir]:checked').val();
+            return dataCategorias.filter(i => Number(i.incluir) === Number(incluir) || Number(incluir) === -1);
         }
         let pintarTarjetas = (tarjetas) => {
             let html = '';
@@ -190,7 +255,6 @@
             document.getElementById("tbodyTblGastos").innerHTML=html;
         }
         const pintarGrafica = (data) => {
-            console.log({data})
             "use strict";
             $("#morris-line-chart").empty();
             let grafi=new Morris.Line({
@@ -202,7 +266,42 @@
                         lineColors: ["#26c6da", "#bca0ee"],
                         labels: ["Presupuesto","Gastos"],
                         hideHover: 'auto'
-                    });
+            });
+
+        }
+
+        const graficaBarra = (data) => {
+            "use strict";
+            $("#bar-line-chart-morris").empty();
+            let grafica = new Morris.Bar({
+                element: "bar-line-chart-morris",
+                data,
+                xkey: "categoria",
+                ykeys: ["montoUtilizado"],
+                labels: ["Monto"],
+                barColors: ["#007bff"]
+            });
+        }
+        const graficaPastel = (data) => {
+            $("#donut-color-chart-morris").empty();
+            let dataDonut = [];
+            dataDonut = data.map(({ categoria, montoUtilizado, incluir }) => {
+                return {
+                    value: montoUtilizado,
+                    label: categoria
+                }
+            });
+
+            let donut = new Morris.Donut({
+                element: 'donut-color-chart-morris',
+                data: dataDonut,
+                //backgroundColor: "#ccc",
+                labelColor: "#999999",
+                colors: ["#226666", "#AA3939", "#D46A6A", "#FFAAAA", "#669999", "#AA8439", "#805C15", "#2E4172", "#4F628E", "#2D882D", "#88CC88", "#004400"],
+                formatter: function (a) {
+                    return "Q" + a;
+                }
+            });
         }
         const filtrarGastos = () => {
             let fechaInicial = $("#txtFechaInicial").val();
@@ -210,7 +309,9 @@
             getGastos(`ListGastos/${fechaInicial}/${fechaFinal}`)
                 .then((info) => {
                     let { infoTabla, infoGrafica } = info;
+                    dataCategorias = infoTabla;
                     pintarFilas(infoTabla);
+                    graficaBarra(infoTabla);
                     pintarGrafica(infoGrafica);
                 });
 
@@ -228,9 +329,18 @@
             .then((info) => {
                 let { infoTabla, infoGrafica } = info;
                 pintarFilas(infoTabla);
+                dataCategorias = infoTabla;
+                graficaBarra(infoTabla);
                 pintarGrafica(infoGrafica);
             });
 
+            $('input:radio[name=tipoGrafica]').change(function () {
+                habilitarGrafica();
+            });
+
+            $('input:radio[name=radioIncluir]').change(function () {
+                habilitarGrafica();
+            });
     });
     </script>
 }

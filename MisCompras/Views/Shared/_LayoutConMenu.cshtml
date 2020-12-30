@@ -38,6 +38,8 @@
     <!-- Responsive css -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
 
+  
+
 
 </head>
 
@@ -281,6 +283,190 @@
                         exit: 'animated bounce'
                     }
                 });
+        }
+    </script>
+
+    <script>
+        var logo = "data:image/png;base64,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";
+        const addHeaderReport = ({ width }, { titulo, nombreArchivo, codigoReporte = "  " }) => {
+            var encabezado = [];
+            let iso1 = {
+                columns: [
+                    { text: codigoReporte, fontSize: 10, alignment: 'right' }
+                ],
+                margin: [0, 10, 30, 0]
+            };
+            let iso2 = {
+                columns: [
+                    { text: ' ', fontSize: 10, alignment: 'right' }
+                ],
+                margin: [0, 0, 30, 0]
+            };
+            let iso3 = {
+                columns: [
+                    { text: ' ', fontSize: 10, alignment: 'right' }
+                ],
+                margin: [0, 0, 30, 0]
+            };
+            let headLogo = {
+                image: logo,
+                width: 40,
+                height: 40,
+                margin: [30, -15, 0, 0]
+            };
+            let headTitulo = {
+                text: "Mis Compras",
+                style: "title",
+                bold: true,
+                fontSize: 15,
+                margin: [0, -45, 0, 0]
+            }
+            let headTtituloPrincial = {
+                text: titulo,
+                style: "title",
+                fontSize: 12,
+                margin: [0, 0, 0, 0]
+            };
+            let headReportName = {
+                text: nombreArchivo,
+                bold: false,
+                style: "title",
+                fontSize: 15,
+                margin: [0, 10, 0, 0]
+            };
+            let headLine = { canvas: [{ type: 'line', x1: 30, y1: 0, x2: (width - 30), y2: 0, lineWidth: 1 }] };
+            encabezado.push(iso1);
+            encabezado.push(iso2);
+            encabezado.push(iso3);
+            encabezado.push(headLogo);
+            encabezado.push(headTitulo);
+            encabezado.push(headTtituloPrincial);
+            encabezado.push(headReportName);
+            encabezado.push(headLine);
+            return encabezado;
+        }
+        const addFootherReport = (page, pages, { width }, { nombreUsuario }) => {
+            let fechaHoy = new Date();
+            let mes = fechaHoy.getMonth() + 1;
+            let dia = fechaHoy.getDate();
+            let hora = fechaHoy.getHours();
+            let minuto = fechaHoy.getMinutes();
+            let segundos = fechaHoy.getSeconds();
+            if (mes < 10) {
+                mes = "0" + mes;
+            }
+            if (dia < 10) {
+                dia = "0" + dia;
+            }
+            if (hora < 10) {
+                hora = "0" + hora;
+            }
+            if (minuto < 10) {
+                minuto = "0" + minuto;
+            }
+            if (segundos < 10) {
+                segundos = "0" + segundos;
+            }
+            let fechaTexto = `${dia}/${mes}/${fechaHoy.getFullYear()} ${hora}:${minuto}:${segundos}`;
+            let footer = [];
+            let item1 = {
+                columns: [
+                    {
+                        alignment: 'left',
+                        text: "Generado por: " + nombreUsuario + " - fecha: " + fechaTexto,
+                        fontSize: 10
+                    },
+                    {
+                        alignment: 'right',
+                        text: ['Página ', { text: page.toString() }, ' de ', { text: pages.toString() }],
+                        fontSize: 10,
+                    }
+                ],
+                margin: [30, 0]
+            };
+
+            let footLine = { canvas: [{ type: 'line', x1: 30, y1: 0, x2: (width - 30), y2: 0, lineWidth: 0.5 }] };
+
+            footer.push(footLine);
+            footer.push(item1);
+
+            return footer;
+        }
+        const PersonaLisarReporte = (configuracion) => {
+            let { pageSize = "LETTER", titulo, nombreUsuario = "", nombreArchivo = 'Reporte', selector, indiceColumnaOrden = 0, order = 'asc', totalFilasMostrar = 25, btnTituloPdf = 'Exportar a Pdf', orientacion = 'landscape', customizarReporte } = !!configuracion && configuracion;
+            var info = {
+                title: titulo,
+                author: nombreUsuario,
+                subject: '',
+                keywords: '',
+                creator: 'Mis Compras',
+                producer: 'Mis Compras'
+            };
+
+            $(selector).DataTable({
+                language: {
+                    processing: "Cargando información",
+                    search: "Filtrar por:",
+                    lengthMenu: "Mostrar _MENU_ filas",
+                    info: "Vizualización  _END_ de _TOTAL_ filas",
+                    infoEmpty: "Vizualización del elemento 0 a 0 de 0 filas",
+                    infoFiltered: "(Filtrado de _MAX_ filas en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se logró encontrar ninguna coincidencia",
+                    emptyTable: "No existen registros",
+                    paginate: {
+                        first: "Primera",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultima"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                order: [[indiceColumnaOrden, order]],
+                displayLength: totalFilasMostrar,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: btnTituloPdf,
+                        orientation: orientacion,
+                        title: '',
+                        pageSize: pageSize,
+                        className: 'btn btn-info mr-1',
+                        filename: titulo,
+                        customize: (doc) => {
+                            doc.info = info;
+                            doc.pageMargins = [30, 90, 30, 70];
+                            doc.defaultStyle = {
+                                fontSize: 8
+                            };
+
+                            doc['footer'] = (function (page, pages, pageSize) {
+                                return addFootherReport(page, pages, pageSize, configuracion);
+                            });
+
+                            doc['header'] = (function (currentPage, pageCount, pageSize) {
+                                return addHeaderReport(pageSize, configuracion);
+                            });
+
+                            if (customizarReporte) {
+                                customizarReporte(doc, configuracion);
+                            }
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Exportar a Excel',
+                        title: `${nombreArchivo} ${titulo}`,
+                        className: 'btn btn-success',
+                        filename: titulo,
+                    }
+                ]
+            });
         }
     </script>
 

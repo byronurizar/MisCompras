@@ -36,8 +36,8 @@
                     <div class="dt-ext table-responsive">
 
                         @*<table id="export-button" class="display">*@
-                        <table id="basic-1" class="display">
-                        @*<table class="table">*@
+                        <table id="tblDeudores" class="display">
+                            @*<table class="table">*@
                             <thead>
                                 <tr>
                                     <th>
@@ -55,20 +55,20 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr>
-                                    <td>
-                                        <a href="~/CreditoAbono/Index/@item.Id">Detalle de Cr&eacute;dito</a>
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Cliente)
-                                    </td>
-                                    <td>
-                                       Q @Html.DisplayFor(modelItem => item.Monto)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="~/CreditoAbono/Index/@item.Id">Detalle de Cr&eacute;dito</a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cliente)
+                                        </td>
+                                        <td>
+                                            Q @Html.DisplayFor(modelItem => item.Monto)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -78,3 +78,59 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var nombreUsuario = "MIS COMPRAS";
+            $("#tblActividades").DataTable().destroy();
+
+            const configuracion = {
+                titulo: 'DEUDORES',
+                nombreArchivo: `Listado de deudores`,
+                selector: '#tblDeudores',
+                orientacion: "potrait",
+                codigoReporte: "",
+                pageSize: 'LETTER',
+                nombreUsuario,
+                  customizarReporte
+            };
+            PersonaLisarReporte(configuracion);
+        });
+
+        const customizarReporte = (doc, _) => {
+            const nuevoBody = [];
+            let indexTotal = undefined;
+            let totalColumnas = undefined;
+            doc.content[0].table.body.map((item) => {
+                let nuevo = [];
+                totalColumnas = item.length;
+                item.map(({ text, style }, i) => {
+                    if (i > 0 && i <= 2) {
+                        let aux = {
+                            text,
+                            style
+                        };
+                        if (text === "Saldo") {
+                            indexTotal = i;
+                        }
+                        if (i === indexTotal) {
+                            aux.alignment = 'right';
+                        } else {
+                            aux.alignment = 'left';
+                        }
+                        nuevo.push(aux);
+                    }
+                })
+                nuevoBody.push(nuevo);
+            })
+            let width = [];
+            let porcentajeColumna = 100 / (totalColumnas-2);
+            for (let index = 1; index <= (totalColumnas-2); index++) {
+                width.push(`${porcentajeColumna}%`);
+            }
+            doc.content[0].table.widths = width;//[ '50%','50%'];
+            delete doc.content[0].table.body;
+            doc.content[0].table.body = nuevoBody;
+        };
+    </script>
+    }
