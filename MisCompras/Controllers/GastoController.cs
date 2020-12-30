@@ -97,8 +97,8 @@ namespace MisCrompras.Controllers
                             DateTime fIniAux = new DateTime(item.Anio, item.Mes, 01);
                             DateTime fFinAux= fIniAux.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59);
                             List<Gasto> listaGastosAux = new List<Gasto>();
-                            listaGastosAux=_context.Gastos.Where(g => g.EstadoId != 3 && (g.FechaCreacion >= fIniAux && g.FechaCreacion <= fFinAux)).ToList();
-                            totalGastos = listaGastosAux.Sum(s => s.Monto);
+                            listaGastosAux=_context.Gastos.Include(g => g.Categoria).Where(g => g.EstadoId != 3 && (g.FechaCreacion >= fIniAux && g.FechaCreacion <= fFinAux)).ToList();
+                            totalGastos = listaGastosAux.Where(a=>a.Categoria.Incluir==1).Sum(s => s.Monto);
 
                             grafica.presupuesto = totalPresupuesto;
                             grafica.gasto = totalGastos;
