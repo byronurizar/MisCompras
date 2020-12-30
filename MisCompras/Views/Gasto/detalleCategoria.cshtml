@@ -1,0 +1,119 @@
+@model IEnumerable<MisCrompras.Models.Gasto>
+
+@{
+    ViewData["Title"] = "Detalle";
+    Layout = "_LayoutConMenu";
+}
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>
+                    Listado de gastos del mes actual
+                    <small>Listado de gastos registrados en el sistema</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Gastos/detalle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                        <div class="dt-ext table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Categoria)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.SubCategoria)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Descripcion)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Monto)
+                                        </th>
+
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FechaCreacion)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Usuario)
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                                            </td>
+                                            @{
+                                                if (item.SubCategoria == null)
+                                                {
+                                                    <td>N/A</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.SubCategoria.Nombre)
+                                                    </td>
+                                                }
+                                            }
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Descripcion)
+                                            </td>
+                                            <td>
+                                                Q @Html.DisplayFor(modelItem => item.Monto)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Usuario.User)
+                                            </td>
+
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                                                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="divContenedorTarjetas">
+    </div>
+</div>
+@section Scripts {
+    <script>
+
+    </script>
+}

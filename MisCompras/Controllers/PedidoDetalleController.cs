@@ -169,11 +169,11 @@ namespace MisCrompras.Controllers
             RespuestaModel rsp = new RespuestaModel();
             try
             {
-                rsp.Codigo = 0;
+                rsp.codigo = 0;
                 rsp.valor = _context.Marcas.Where(m=>m.Id== MarcaId);
             }catch(Exception ex)
             {
-                rsp.Codigo = -1;
+                rsp.codigo = -1;
                 rsp.error = ex.ToString();
                 rsp.valor = null;
             }

@@ -1,6 +1,10 @@
 @model IEnumerable<MisCrompras.Models.Gasto>
 
 @{
+    DateTime fechaInicial = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01);
+    DateTime fechaFinal = fechaInicial.AddMonths(1).AddDays(-1).AddHours(23).AddMinutes(59);
+    string fInicial = fechaInicial.ToString("yyyy-MM-dd");
+    string fFinal = fechaFinal.ToString("yyyy-MM-dd");
     ViewData["Title"] = "Todos";
     Layout = "_LayoutConMenu";
 }
@@ -29,137 +33,39 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5><a asp-action="Create"><i class="fa fa-plus">Nueva</i></a> </h5>
+                    <h5><a asp-action="Create"><i class="fa fa-plus">Nuevo</i></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a asp-action="DetalleCategoria"><i class="fa fa-list">Gastos del mes</i></a> </h5>
                 </div>
                 <div class="card-body">
-                    <div class="dt-ext table-responsive">
-                        <table class="table">
+                    <form class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-6">
+                                <label for="validationCustom01">Fecha Inicial</label>
+                                <input type="date" class="form-control" id="txtFechaInicial" value="@fInicial" required>
+                            </div>
+                            <div class="col-md-4 mb-6">
+                                <label for="validationCustom02">Fecha Final</label>
+                                <input type="date" class="form-control" id="txtFechaFinal" value="@fFinal" required>
+                            </div>
+                            <div class="col-md-2 mb-6">
+                                <label for="validationCustom02">&nbsp;&nbsp;</label>
+                                <button class="form-control btn btn-primary" type="button" onclick="filtrarGastos();">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr />
+
+                    <div class="user-status table-responsive">
+                        <table class="table table-bordernone">
                             <thead>
                                 <tr>
-                                    <th>
-                                        Categoria
-                                    </th>
-                                    <th>
-                                        Monto
-                                    </th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Presupuesto</th>
+                                    <th scope="col">Utilizado</th>
+                                    <th scope="col">Pendiente</th>
+                                    <th scope="col">Gr&aacute;fica</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach (var ga in ViewBag.Agrupacion)
-                                {
-                                    <tr>
-                                        <td>
-                                            @ga.Categoria
-                                        </td>
-                                        <td>
-                                            Q @ga.Monto
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>
-                                        Total de gastos mes actual
-                                    </th>
-                                    <th>
-                                        @ViewBag.TotalGastos
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Total de gastos en Ventas
-                                    </th>
-                                    <th>
-                                        @ViewBag.totalGastosVentas
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Total
-                                    </th>
-                                    <th>
-                                        @ViewBag.Total
-                                    </th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <div class="dt-ext table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Categoria)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.SubCategoria)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Descripcion)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Monto)
-                                    </th>
-
-
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.FechaCreacion)
-                                    </th>
-
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Usuario)
-                                    </th>
-
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Categoria.Nombre)
-                                        </td>
-                                        @{
-                                            if (item.SubCategoria == null)
-                                            {
-                                                <td>N/A</td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.SubCategoria.Nombre)
-                                                </td>
-                                            }
-                                        }
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Descripcion)
-                                        </td>
-                                        <td>
-                                            Q @Html.DisplayFor(modelItem => item.Monto)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.FechaCreacion)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Usuario.User)
-                                        </td>
-
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
+                            <tbody id="tbodyTblGastos"></tbody>
                         </table>
                     </div>
                 </div>
@@ -167,14 +73,164 @@
             </div>
         </div>
     </div>
+
+    <div class="row" id="divContenedorTarjetas">
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Presupuesto/Gastos</h5>
+                </div>
+                <div class="card-body chart-block">
+                    <div class="flot-chart-container">
+                        <div id="morris-line-chart" class="flot-chart-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
     <script>
-    $(document).ready(function () {
+        const getGastos = async (url) => {
+            const response = await fetch(url);
+            const result = await response.json();
+            const { codigo, mensaje, error, valor } = result;
+            if (codigo === 0) {
+                return valor;
+            } else {
+                alerta('Error', mensaje, 'danger');
+            }
+        }
+        let pintarTarjetas = (tarjetas) => {
+            let html = '';
+            tarjetas.map(({ nombre, presupuesto, utilizado }) => {
+                let pendiente = Number(presupuesto) - Number(utilizado);
+                let porcentajeGrafia = Number.parseFloat(utilizado) / Number.parseFloat(presupuesto);
+                let porcentaje = Number.parseInt(porcentajeGrafia * 100).toFixed(0);
+
+                html += `   <div class="col-xl-4 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>${nombre}</h5>
+                </div>
+                <div class="ecommerce-widget card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <span>Presupuesto</span>
+                            <h3 class="total-num counter ${presupuesto <= 0 && 'font-danger'}">Q${Number.parseFloat(presupuesto).toFixed(2)}</h3>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-md-right">
+                                <ul>
+                                    <li>Utilizado<span class="product-stts ${Number(utilizado) > Number(presupuesto) ? 'txt-danger' :'txt-success'} ml-2">Q${Number.parseFloat(utilizado).toFixed(2)}</span></li>
+                                    <li>% Utilizado<span class="product-stts ${porcentaje <= 80 ? 'txt-success' : porcentaje < 99 ? 'txt-warning' : 'txt-danger'} ml-2">${Number.parseFloat(porcentaje).toFixed(0)}%</span></li>
+                                    <li>Pendiente<span class="product-stts ${Number(pendiente) < 0 ? 'txt-danger' : 'txt-success'} ml-2">Q${Number.parseFloat(pendiente).toFixed(2)}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-showcase">
+                        <div class="progress lg-progress-bar">
+                            <div class="progress-bar ${porcentaje <= 80 ? 'bg-success' : porcentaje < 99 ? 'bg-warning' : 'bg-danger'}" role="progressbar" style="width: ${porcentaje}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+            }
+            );
+            document.getElementById("divContenedorTarjetas").innerHTML = html;
+        }
+        const pintarFilas = (listGastos) => {
+            let html = '';
+            let totalIncluirUtilizado = 0;
+            let totalIncluirPresupuesto = 0;
+            let itemsTarjetas = [];
+            listGastos.map(({ categoria, presupuesto, montoUtilizado, montoPendiente,incluir }) => {
+                let classTdDanger = `class="font-danger"`;
+                let classTdSuccess = `class="font-success"`;
+                let porcentajeGrafia = Number.parseFloat(montoUtilizado) / Number.parseFloat(presupuesto);
+                let porcentaje = Number.parseInt(porcentajeGrafia * 100).toFixed(0);
+
+                if (Number(incluir) === 1) {
+                    totalIncluirUtilizado += montoUtilizado;
+                    totalIncluirPresupuesto += presupuesto;
+                } else {
+                    itemsTarjetas.push({
+                        nombre: categoria,
+                        presupuesto,
+                        utilizado: montoUtilizado
+                    });
+                }
+                html += `
+                        <tr>
+                            <td>${categoria}</td>
+                            <td ${Number(presupuesto) === 0 && classTdDanger}>Q${Number(presupuesto).toFixed(2)}</td>
+                            <td>Q${Number(montoUtilizado).toFixed(2)}</td>
+                            <td ${Number(montoPendiente) < 0 && classTdDanger}>Q${Number(montoPendiente).toFixed(2)}</td>
+                            <td>
+                            <div class="progress-showcase">
+                            <div class="progress lg-progress-bar">
+                            <div class="progress-bar ${porcentaje <= 80 ? 'bg-success' : porcentaje < 99 ? 'bg-warning' :'bg-danger'}" role="progressbar" style="width: ${porcentaje}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            </div>
+                            </td>
+                        </tr>
+                `;
+            });
+
+            itemsTarjetas.unshift({
+                nombre: 'GASTOS FAMILIARES',
+                presupuesto: totalIncluirPresupuesto,
+                utilizado: totalIncluirUtilizado
+            });
+            pintarTarjetas(itemsTarjetas);
+            document.getElementById("tbodyTblGastos").innerHTML=html;
+        }
+        const pintarGrafica = (data) => {
+            console.log({data})
+            "use strict";
+            $("#morris-line-chart").empty();
+            let grafi=new Morris.Line({
+                        element: "morris-line-chart",
+                        data,
+                        xkey: "nombreMes",
+                        parseTime: false,
+                        ykeys: ["presupuesto", "gasto"],
+                        lineColors: ["#26c6da", "#bca0ee"],
+                        labels: ["Presupuesto","Gastos"],
+                        hideHover: 'auto'
+                    });
+        }
+        const filtrarGastos = () => {
+            let fechaInicial = $("#txtFechaInicial").val();
+            let fechaFinal = $("#txtFechaFinal").val();
+            getGastos(`ListGastos/${fechaInicial}/${fechaFinal}`)
+                .then((info) => {
+                    let { infoTabla, infoGrafica } = info;
+                    pintarFilas(infoTabla);
+                    pintarGrafica(infoGrafica);
+                });
+
+            //fechaInicial = fechaInicial.replace(/-/g, "");
+            //fechaFinal = fechaFinal.replace(/-/g, "");
+            //console.log({ fechaInicial, fechaFinal})
+        }
+        $(document).ready(function () {
         let mensaje = '@TempData["mensaje"]';
         if (mensaje) {
         alerta('informaci&oacute;n!', mensaje, 'danger');
         }
+
+        getGastos("ListGastos/actual/actual")
+            .then((info) => {
+                let { infoTabla, infoGrafica } = info;
+                pintarFilas(infoTabla);
+                pintarGrafica(infoGrafica);
+            });
+
     });
     </script>
 }

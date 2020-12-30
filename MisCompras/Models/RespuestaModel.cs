@@ -7,7 +7,7 @@ namespace MisCompras.Models
 {
     public class RespuestaModel
     {
-        public int Codigo { get; set; }
+        public int codigo { get; set; }
         public string mensaje { get; set; }
         public string error { get; set; }
         public object valor { get; set; }
