@@ -92,7 +92,7 @@ namespace MisCrompras.Controllers
                 return NotFound();
             }
 
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre");
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias.Where(item => item.EstadoId == 1), "Id", "Nombre");
             return View();
         }
 

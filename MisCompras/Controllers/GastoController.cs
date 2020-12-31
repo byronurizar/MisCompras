@@ -346,6 +346,7 @@ namespace MisCrompras.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", gasto.CategoriaId);
+
             return View(gasto);
         }
 
