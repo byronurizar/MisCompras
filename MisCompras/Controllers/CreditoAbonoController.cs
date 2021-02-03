@@ -37,7 +37,7 @@ namespace MisCrompras.Controllers
             decimal totalCredito = 0;
             decimal saldo = 0;
 
-            var misComprasContext = _context.CreditoAbonos.Include(c => c.Cliente).Include(c => c.Estado).Include(c => c.Usuario).Where(c=>c.ClienteId==id);
+            var misComprasContext = _context.CreditoAbonos.Include(c => c.Cliente).Include(c => c.Estado).Include(c => c.Usuario).Where(c=>c.ClienteId==id).OrderByDescending(f=>f.FechaCreacion);
             foreach (CreditoAbono item in misComprasContext)
             {
                 if (item.Tipo == 0)
